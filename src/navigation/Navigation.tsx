@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 import HomeTwo from '../pages/HomeTwo';
 import Blog from '../pages/Blog';
 import BlogDetails from '../pages/BlogDetails';
-// import Contact from '../pages/Contact';
+import Contact from '../pages/Contact';
 import Predict from '../pages/Predict';
 import Forgot from '../pages/Forgot';
 import Register from '../pages/Register';
@@ -26,7 +26,7 @@ const AppNavigation = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog-details" element={<BlogDetails />} />
         <Route path="/blog-details/:id" element={<DynamicBlogDeatils />} />
-        {/* <Route path="/contact" element={<Contact />} /> */}
+        <Route path="/contact" element={<Contact />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/predict" element={<Predict />} />
         <Route path="/register" element={<Register />} />

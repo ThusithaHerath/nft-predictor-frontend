@@ -6,7 +6,6 @@ import BlogDetailsArea from '../component/blogs/blog-details/BlogDetailsArea';
 import { useParams } from 'react-router-dom';
 import useBlogs from '../hooks/UseBlog';
 import HeaderThree from '../layouts/headers/HeaderThree';
-import DocumentArea from '../component/common/DocumentArea';
 import FooterThree from '../layouts/footers/FooterThree';
 
 const DynamicBlogDeatils = () => {
@@ -20,7 +19,6 @@ const DynamicBlogDeatils = () => {
          <HeaderThree />
          <Breadcrumb title="Blog Details" />
          <BlogDetailsArea blog={blog} />
-         <DocumentArea />
          <FooterThree />
       </Wrapper>
    );

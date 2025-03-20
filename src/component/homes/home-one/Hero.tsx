@@ -30,10 +30,7 @@ const Hero = () => {
                      </p>
                      <div className="btn-wrap">
                         <Link to="/predict" className="btn btn2">
-                           Predict Existing Collection
-                        </Link>
-                        <Link to="/predict-new" className="btn btn-two">
-                           Predict New Collection
+                           Start Prediction
                         </Link>
                      </div>
                   </div>

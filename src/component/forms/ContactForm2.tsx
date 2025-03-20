@@ -1,113 +1,240 @@
 "use client"
-import { useRef } from 'react';
+import { useRef,useState } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-interface FormData {
+interface ExistingCollectionForm {
+   Volume: number;
+   Sales: number;
+   Owners: number;
+   Average_Price: number;
+}
+
+interface NewCollectionForm {
    Category: string;
    Roadmap_Strength: number;
    Social_Media_Sentiment: number;
    Whitelist_Count: number;
 }
 
-const schema = yup
-   .object({
-      Category: yup.string().required().label("Category"),
-      Roadmap_Strength: yup
-         .number()
-         .typeError('Roadmap Strength must be a number')
-         .required('Roadmap Strength is required'),
-      Social_Media_Sentiment: yup
-         .number()
-         .typeError('Social Media Sentiment must be a number')
-         .required('Social Media Sentiment is required'),
-      Whitelist_Count: yup
-         .number()
-         .typeError('Whitelist Count must be a number')
-         .required('Whitelist Count is required'),
-   })
-   .required();
 
+const existingCollectionSchema = yup.object({
+   Volume: yup
+     .number()
+     .typeError("Volume must be a number")
+     .required("Volume is required"),
+   Sales: yup
+     .number()
+     .typeError("Sales must be a number")
+     .required("Sales is required"),
+   Owners: yup
+     .number()
+     .typeError("Owners must be a number")
+     .required("Owners is required"),
+   Average_Price: yup
+     .number()
+     .typeError("Average Price must be a number")
+     .required("Average Price is required"),
+ });
+ 
+ const newCollectionSchema = yup.object({
+   Category: yup.string().required("Category is required"),
+   Roadmap_Strength: yup
+     .number()
+     .typeError("Roadmap Strength must be a number")
+     .required("Roadmap Strength is required"),
+   Social_Media_Sentiment: yup
+     .number()
+     .typeError("Social Media Sentiment must be a number")
+     .required("Social Media Sentiment is required"),
+   Whitelist_Count: yup
+     .number()
+     .typeError("Whitelist Count must be a number")
+     .required("Whitelist Count is required"),
+ });
+ interface LocationSuccessRate {
+   latitude: number;
+   longitude: number;
+   location: string;
+   success_rate: string;
+}
 
-const ContactForm2 = () => {
+interface PredictionResponse {
+   success_probability: string;
+   risk_level: string;
+   location_success_rates: LocationSuccessRate[];
+   recommended_marketing_strategies: string[];
+   strategy_explanation: string[];
+}
 
-   const { register, handleSubmit, formState: { errors }, } = useForm<FormData>({ resolver: yupResolver(schema), });
+ interface ContactForm2Props {
+   setPredictionData: React.Dispatch<React.SetStateAction<PredictionResponse | null>>;
+}
 
-   const form = useRef<HTMLFormElement>(null);
+   const ContactForm2 = ({ setPredictionData }: ContactForm2Props) => {
+      const [activeTab, setActiveTab] = useState<"existing" | "new">("existing");
+  // Separate useForm instances
+  const existingFormMethods = useForm<ExistingCollectionForm>({
+   resolver: yupResolver(existingCollectionSchema),
+ });
 
-   const predictSuccess = async (data: FormData) => {
-    try {
-        const requestBody = {
-            collection_type: "new",
-            Category: data.Category,
-            Roadmap_Strength: Number(data.Roadmap_Strength),  // Convert string to number
-            Social_Media_Sentiment: Number(data.Social_Media_Sentiment),  // Convert to number
-            Whitelist_Count: Number(data.Whitelist_Count)  // Convert to number
-        };
+ const newFormMethods = useForm<NewCollectionForm>({
+   resolver: yupResolver(newCollectionSchema),
+ });
 
-        console.log("Sending data:", requestBody);  // Debug log
+ // Select the correct form methods dynamically
+ const {
+   handleSubmit,
+   formState: { },
+ } = activeTab === "new" ? newFormMethods : existingFormMethods;
 
-        const response = await fetch("https://nft-predictor-ib27.onrender.com/predict-nft", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestBody),
-        });
-
-        const result = await response.json();
-        console.log("API Response:", result);  // Log response
-
-        if (response.ok) {
-            toast.success(`Prediction Success: ${result.success_probability}`, { position: "top-center" });
-        } else {
+      const form = useRef<HTMLFormElement>(null);
+    
+      const predictSuccess = async (data: ExistingCollectionForm | NewCollectionForm) => {
+         try {
+          let requestBody;
+    
+          if (activeTab === "new") {
+            requestBody = {
+               collection_type: "new",
+               ...(data as NewCollectionForm),
+             };
+          } else {
+            requestBody = {
+               collection_type: "existing",
+               ...(data as ExistingCollectionForm),
+             };
+          }
+    
+          console.log("Sending data:", requestBody); // Debug log
+    
+          const response = await fetch(
+            "https://nft-predictor-ib27.onrender.com/predict-nft",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(requestBody),
+            }
+          );
+    
+          const result = await response.json();
+          console.log("API Response:", result); // Log response
+    
+          if (response.ok) {
+            toast.success(`Prediction Success: ${result.success_probability}`, {
+              position: "top-center",
+            });
+            setPredictionData(result); // 🔥 Update the state in PredictArea
+          } else {
             toast.error(`Error: ${result.error}`, { position: "top-center" });
+          }
+        } catch (error) {
+          console.error("API request failed:", error);
+          toast.error("Failed to fetch prediction", { position: "top-center" });
         }
-    } catch (error) {
-        console.error("API request failed:", error);
-        toast.error("Failed to fetch prediction", { position: "top-center" });
-    }
-};
-
-
-   return (
-      <form ref={form} onSubmit={handleSubmit(predictSuccess)}>
-         <div className="row">
-            <div className="col-md-6">
-               <div className="form-grp">
-                  <input type="text" {...register("Category")} name="Category" placeholder="Category" />
-                  <p className="form_error">{errors.Category?.message}</p>
-               </div>
-            </div>
-            <div className="col-md-6">
-               <div className="form-grp">
-                  <input type="number" {...register("Roadmap_Strength")} name="Roadmap_Strength" placeholder="Roadmap Strength" />
-                  <p className="form_error">{errors.Roadmap_Strength?.message}</p>
-               </div>
-            </div>
-            <div className="col-md-6">
-               <div className="form-grp">
-               <input 
-              type="number" 
-              step="0.1" 
-              {...register("Social_Media_Sentiment")} 
-              placeholder="Social Media Sentiment (0-1)" 
-            />
-            <p className="form_error">{errors.Social_Media_Sentiment?.message}</p>
-               </div>
-            </div>
-            <div className="col-md-6">
-               <div className="form-grp">
-                  <input type="number" {...register("Whitelist_Count")} name="Whitelist_Count" placeholder="Whitelist count" />
-                  <p className="form_error">{errors.Whitelist_Count?.message}</p>
-               </div>
-            </div>
-         </div>
-         <button type="submit" value="Send" className="btn">Predict Success</button>
-      </form>
-   );
-};
-
-export default ContactForm2;
+      };
+    
+      return (
+        <div>
+          <ul className="nav nav-pills nav-fill">
+            <li className="nav-item">
+              <button
+                className={`nav-link ${activeTab === "existing" ? "active" : ""}`}
+                onClick={() => setActiveTab("existing")}
+              >
+                Existing Collection
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className={`nav-link ${activeTab === "new" ? "active" : ""}`}
+                onClick={() => setActiveTab("new")}
+              >
+                New Collection
+              </button>
+            </li>
+          </ul>
+    
+          <div className="tab-content mt-3">
+            {/* Existing Collection Form */}
+            {activeTab === "existing" && (
+              <div className="tab-pane fade show active">
+                <form ref={form} onSubmit={handleSubmit(predictSuccess)}>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-grp">
+                      <input type="number" {...existingFormMethods.register("Volume")} placeholder="Volume" />
+                      <p className="form_error">{existingFormMethods.formState.errors.Volume?.message}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-grp">
+                      <input type="number" {...existingFormMethods.register("Sales")} placeholder="Sales" />
+                      <p className="form_error">{existingFormMethods.formState.errors.Sales?.message}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-grp">
+                      <input type="number" {...existingFormMethods.register("Owners")} placeholder="Owners" />
+                      <p className="form_error">{existingFormMethods.formState.errors.Owners?.message}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-grp">
+                      <input type="number" step="0.1" {...existingFormMethods.register("Average_Price")} placeholder="Average Price" />
+                      <p className="form_error">{existingFormMethods.formState.errors.Average_Price?.message}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" className="btn">
+                    Predict Success
+                  </button>
+                </form>
+              </div>
+            )}
+    
+            {/* New Collection Form */}
+            {activeTab === "new" && (
+              <div className="tab-pane fade show active">
+                <form ref={form} onSubmit={handleSubmit(predictSuccess)}>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-grp">
+                      <input type="text" {...newFormMethods.register("Category")} placeholder="Category" />
+                      <p className="form_error">{newFormMethods.formState.errors.Category?.message}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-grp">
+                      <input type="number" {...newFormMethods.register("Roadmap_Strength")} placeholder="Roadmap Strength" />
+                      <p className="form_error">{newFormMethods.formState.errors.Roadmap_Strength?.message}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-grp">
+                      <input type="number" step="0.1" {...newFormMethods.register("Social_Media_Sentiment")} placeholder="Social Media Sentiment (0-1)" />
+                      <p className="form_error">{newFormMethods.formState.errors.Social_Media_Sentiment?.message}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-grp">
+                      <input type="number" {...newFormMethods.register("Whitelist_Count")} placeholder="Whitelist count" />
+                      <p className="form_error">{newFormMethods.formState.errors.Whitelist_Count?.message}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" className="btn">
+                    Predict Success
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+    
+    export default ContactForm2;
+    
