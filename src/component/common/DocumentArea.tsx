@@ -1,3 +1,5 @@
+import GoogleMapComponent from "../maps/GoogleMapComponent"
+
 interface LocationSuccessRate {
    latitude: number;
    longitude: number;
@@ -50,7 +52,6 @@ const DocumentArea = ({ predictionData }: { predictionData: PredictionResponse |
                <div className="row mt-20">
                   <div className="row-lg-8">
                      <div className="document-form-wrap">
-                        <h4 className="title">Prediction Summary</h4>
                         <p><strong>Success Probability:</strong> {predictionData.success_probability}</p>
                         <p><strong>Risk Level:</strong> {predictionData.risk_level}</p>
 
@@ -63,7 +64,9 @@ const DocumentArea = ({ predictionData }: { predictionData: PredictionResponse |
                               </li>
                            ))}
                         </ul>
-
+                        <h4>🌍 Google Maps View:</h4>
+                        <GoogleMapComponent locations={predictionData.location_success_rates} />
+                        
                         <h4>📢 Recommended Marketing Strategies:</h4>
                         <ul>
                            {predictionData.recommended_marketing_strategies.map((strategy, index) => (
