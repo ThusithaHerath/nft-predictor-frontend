@@ -98,7 +98,7 @@ const ContactForm2 = () => {
                </div>
             </div>
          </div>
-         <button type="submit" value="Send" className="btn">Predict</button>
+         <button type="submit" value="Send" className="btn">Predict Success</button>
       </form>
    );
 };
