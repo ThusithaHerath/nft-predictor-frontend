@@ -27,7 +27,7 @@ const NavMenu = () => {
           <li><Link onClick={() => setNavClick(!navClick)} to="/blog-details"> Blog Details</Link></li>
         </ul>
       </li>
-      <li><Link onClick={() => setNavClick(!navClick)} to="/contact" className="section-link"> Contact</Link></li>
+      {/* <li><Link onClick={() => setNavClick(!navClick)} to="/contact" className="section-link"> Contact</Link></li> */}
     </ul>
   );
 };

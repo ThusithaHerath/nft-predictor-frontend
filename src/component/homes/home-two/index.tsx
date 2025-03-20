@@ -1,6 +1,6 @@
 import FooterTwo from "../../../layouts/footers/FooterTwo"
 import HeaderTwo from "../../../layouts/headers/HeaderTwo"
-import Brand from "./Brand"
+
 import CtaArea from "./CtaArea"
 import CtaAreaTwo from "./CtaAreaTwo"
 import FaqArea from "./FaqArea"

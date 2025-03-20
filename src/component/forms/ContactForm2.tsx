@@ -15,18 +15,25 @@ interface FormData {
 const schema = yup
    .object({
       Category: yup.string().required().label("Category"),
-      Roadmap_Strength: yup.string().required().label("Roadmap Strength"),
+      Roadmap_Strength: yup
+         .number()
+         .typeError('Roadmap Strength must be a number')
+         .required('Roadmap Strength is required'),
       Social_Media_Sentiment: yup
          .number()
-         .typeError('Social Media Sentiment is a required field')
-         .required('Social Media Sentiment'),
-    Whitelist_Count: yup.string().required().label("Whitelist Count"),
+         .typeError('Social Media Sentiment must be a number')
+         .required('Social Media Sentiment is required'),
+      Whitelist_Count: yup
+         .number()
+         .typeError('Whitelist Count must be a number')
+         .required('Whitelist Count is required'),
    })
    .required();
 
+
 const ContactForm2 = () => {
 
-   const { register, handleSubmit, reset, formState: { errors }, } = useForm<FormData>({ resolver: yupResolver(schema), });
+   const { register, handleSubmit, formState: { errors }, } = useForm<FormData>({ resolver: yupResolver(schema), });
 
    const form = useRef<HTMLFormElement>(null);
 

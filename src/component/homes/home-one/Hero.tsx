@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import CountdownClock from "../../../ui/CountDownClock";
+
 
 const Hero = () => {
    return (

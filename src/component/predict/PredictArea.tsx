@@ -1,27 +1,8 @@
-import { Link } from "react-router-dom";
+
 import ContactForm2 from "../forms/ContactForm2"
 
-interface DataType {
-   id: number;
-   icon: string;
-   title: string;
-   info: JSX.Element;
-}
 
-const contact_data: DataType[] = [
-   {
-      id: 2,
-      icon: "fas fa-phone-alt",
-      title: "Contact",
-      info: (<><Link to="tel:0123456789">+94 71 140 72 61</Link> <br /></>),
-   },
-   {
-      id: 3,
-      icon: "fas fa-envelope",
-      title: "Email",
-      info: (<><Link to="mailto:xeco.@example.com">nftpredictor@predict.com</Link></>),
-   },
-]
+
 
 const PredictArea = () => {
    return (

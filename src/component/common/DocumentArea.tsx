@@ -1,4 +1,4 @@
-const doc_data: string[] = ["Whitepaper", "Token Sale Terms", "Presentation", "Lightpaper"]
+
 
 const DocumentArea = () => {
    return (
