@@ -20,7 +20,7 @@ const NavMenuTwo = () => {
                 </ul>
             </li>
             <li><HashLink to="/home-two/#blockchain" className="section-link">Why Blockchain</HashLink></li>
-            <li><HashLink to="/home-two/#feature" className="section-link">Feature</HashLink></li>
+            {/* <li><HashLink to="/home-two/#feature" className="section-link">Feature</HashLink></li> */}
             <li><Link onClick={() => setNavClick(!navClick)} to="#" className="section-link"> Blog</Link>
                 <ul className="sub-menu">
                     <li><Link onClick={() => setNavClick(!navClick)} to="/blog"> Blog</Link></li>

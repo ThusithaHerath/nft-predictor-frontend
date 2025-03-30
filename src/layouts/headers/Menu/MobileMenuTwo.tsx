@@ -41,9 +41,9 @@ const MobileMenusTwo = ({ setIsActive }: any) => {
          <li onClick={closeSidebar}>
             <HashLink onClick={() => setNavClick(!navClick)} to="/home-two/#blockchain" className="section-link">Why Blockchain</HashLink>
          </li>
-         <li onClick={closeSidebar}>
+         {/* <li onClick={closeSidebar}>
             <HashLink onClick={() => setNavClick(!navClick)} to="/home-two/#feature" className="section-link">Feature</HashLink>
-         </li>
+         </li> */}
          <li className="menu-item-has-children">
             <Link onClick={() => setNavClick(!navClick)} to="#" className="section-link">Blog</Link>
             <div className={`dropdown-btn ${navTitle === "Blog" ? "open" : ""}`}
