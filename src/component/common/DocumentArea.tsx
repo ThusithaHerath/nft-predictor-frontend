@@ -37,6 +37,8 @@ const DocumentArea = ({ predictionData }: { predictionData: PredictionResponse |
       );
    }
 
+    
+
    return (
       <section className="document-area">
          <div className="container">
@@ -59,19 +61,31 @@ const DocumentArea = ({ predictionData }: { predictionData: PredictionResponse |
                         </div>
                      </div>
                   </div>
+                  
                   <div className="col-md-6">
-                     <div className="card text-white bg-danger shadow-lg p-3">
-                        <div className="card-body text-center">
-                           <h4 className="card-title">⚠ Risk Level</h4>
-                           <h3 className="display-4 fw-bold">{predictionData.risk_level}</h3>
+                        <div
+                           className={`card text-white shadow-lg p-3 ${
+                              predictionData.risk_level === "High"
+                              ? "bg-danger"
+                              : predictionData.risk_level === "Medium"
+                              ? "bg-warning"
+                              : "bg-success"
+                           }`}
+                        >
+                           <div className="card-body text-center">
+                              <h4 className="card-title">⚠ Risk Level</h4>
+                              <h3 className="display-4 fw-bold">{predictionData.risk_level}</h3>
+                           </div>
                         </div>
-                     </div>
-                  </div>
+                        </div>
+
+
+
                </div>
                
 
                {/* Best Locations */}
-               {/* <div className="mt-4">
+               <div className="mt-4">
                   <h4 className="text-primary">📍 Best Locations</h4>
                   <ul className="list-group">
                      {predictionData.location_success_rates.map((location, index) => (
@@ -81,7 +95,7 @@ const DocumentArea = ({ predictionData }: { predictionData: PredictionResponse |
                         </li>
                      ))}
                   </ul>
-               </div> */}
+               </div>
 
                {/* Google Map */}
                <div className="mt-4">

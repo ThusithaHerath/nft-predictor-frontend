@@ -84,6 +84,8 @@ interface PredictionResponse {
    resolver: yupResolver(newCollectionSchema),
  });
 
+ const [isLoading, setIsLoading] = useState(false);
+
  // Select the correct form methods dynamically
  const {
    handleSubmit,
@@ -93,48 +95,46 @@ interface PredictionResponse {
       const form = useRef<HTMLFormElement>(null);
     
       const predictSuccess = async (data: ExistingCollectionForm | NewCollectionForm) => {
-         try {
+        try {
+          setIsLoading(true); // Start spinner
           let requestBody;
-    
+      
           if (activeTab === "new") {
             requestBody = {
-               collection_type: "new",
-               ...(data as NewCollectionForm),
-             };
+              collection_type: "new",
+              ...(data as NewCollectionForm),
+            };
           } else {
             requestBody = {
-               collection_type: "existing",
-               ...(data as ExistingCollectionForm),
-             };
+              collection_type: "existing",
+              ...(data as ExistingCollectionForm),
+            };
           }
-    
-          console.log("Sending data:", requestBody); // Debug log
-    
-          const response = await fetch(
-            "https://nft-predictor-ib27.onrender.com/predict-nft",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(requestBody),
-            }
-          );
-    
+      
+          const response = await fetch("https://nft-predictor-ib27.onrender.com/predict-nft", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody),
+          });
+      
           const result = await response.json();
-          console.log("API Response:", result); // Log response
-    
+      
           if (response.ok) {
             toast.success(`Prediction Success: ${result.success_probability}`, {
               position: "top-center",
             });
-            setPredictionData(result); // 🔥 Update the state in PredictArea
+            setPredictionData(result);
           } else {
             toast.error(`Error: ${result.error}`, { position: "top-center" });
           }
         } catch (error) {
           console.error("API request failed:", error);
           toast.error("Failed to fetch prediction", { position: "top-center" });
+        } finally {
+          setIsLoading(false); // Stop spinner
         }
       };
+      
     
       return (
         <div>
@@ -165,32 +165,44 @@ interface PredictionResponse {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-grp">
+                      <label>Volume</label>
                       <input type="number" {...existingFormMethods.register("Volume")} placeholder="Volume" />
                       <p className="form_error">{existingFormMethods.formState.errors.Volume?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
+                      <label>Sales</label>
                       <input type="number" {...existingFormMethods.register("Sales")} placeholder="Sales" />
                       <p className="form_error">{existingFormMethods.formState.errors.Sales?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
+                      <label>Owners</label>
                       <input type="number" {...existingFormMethods.register("Owners")} placeholder="Owners" />
                       <p className="form_error">{existingFormMethods.formState.errors.Owners?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
+                      <label>Average Price</label>
                       <input type="number" step="0.1" {...existingFormMethods.register("Average_Price")} placeholder="Average Price" />
                       <p className="form_error">{existingFormMethods.formState.errors.Average_Price?.message}</p>
                       </div>
                     </div>
                   </div>
-                  <button type="submit" className="btn">
-                    Predict Success
-                  </button>
+                  <button type="submit" className="btn" disabled={isLoading}>
+  {isLoading ? (
+    <>
+      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+      Prediction running...
+    </>
+  ) : (
+    "Predict Success"
+  )}
+</button>
+
                 </form>
               </div>
             )}
@@ -202,32 +214,44 @@ interface PredictionResponse {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-grp">
+                      <label>Category</label>
                       <input type="text" {...newFormMethods.register("Category")} placeholder="Category" />
                       <p className="form_error">{newFormMethods.formState.errors.Category?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
+                      <label>Roadmap Strength</label>
                       <input type="number" {...newFormMethods.register("Roadmap_Strength")} placeholder="Roadmap Strength" />
                       <p className="form_error">{newFormMethods.formState.errors.Roadmap_Strength?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
+                      <label>Social Media Sentiment</label>
                       <input type="number" step="0.1" {...newFormMethods.register("Social_Media_Sentiment")} placeholder="Social Media Sentiment (0-1)" />
                       <p className="form_error">{newFormMethods.formState.errors.Social_Media_Sentiment?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
+                      <label>Whitelist Count</label>
                       <input type="number" {...newFormMethods.register("Whitelist_Count")} placeholder="Whitelist count" />
                       <p className="form_error">{newFormMethods.formState.errors.Whitelist_Count?.message}</p>
                       </div>
                     </div>
                   </div>
-                  <button type="submit" className="btn">
-                    Predict Success
-                  </button>
+                  <button type="submit" className="btn" disabled={isLoading}>
+  {isLoading ? (
+    <>
+      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+      Prediction running...
+    </>
+  ) : (
+    "Predict Success"
+  )}
+</button>
+
                 </form>
               </div>
             )}
