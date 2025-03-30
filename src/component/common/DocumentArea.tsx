@@ -99,9 +99,10 @@ const DocumentArea = ({ predictionData }: { predictionData: PredictionResponse |
 
                {/* Google Map */}
                <div className="mt-4">
-                  <h4 className="text-white text-center">🌍 Google Maps View</h4>
-                  <GoogleMapComponent locations={predictionData.location_success_rates} />
-               </div>
+   <h4 className="text-white text-center">🌍 Google Maps View</h4>
+   <GoogleMapComponent locations={predictionData.location_success_rates} />
+</div>
+
 
                {/* Recommended Marketing Strategies */}
                <div className="mt-4">

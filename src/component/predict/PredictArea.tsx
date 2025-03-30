@@ -27,7 +27,7 @@ const PredictArea = () => {
             <div className="contact-form-wrap">
                <div className="row g-0">
                      <div className="contact-form">
-                        <h4 className="title">Get your predictions</h4>
+                        <h4 className="title">Get your prediction</h4>
                         <ContactForm2 setPredictionData={setPredictionData}/>
                      </div>
                      <div className="contact-form">
