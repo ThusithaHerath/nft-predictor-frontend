@@ -19,7 +19,7 @@ const NavMenu = () => {
           <li><Link onClick={() => setNavClick(!navClick)} to="/home-two"> Blockchain</Link></li>
         </ul>
       </li>
-      <li><HashLink to="/#featureone" className="section-link">Feature</HashLink></li>
+      {/* <li><HashLink to="/#featureone" className="section-link">Feature</HashLink></li> */}
       <li><HashLink to="/#roadMap" className="section-link">RoadMap</HashLink></li>
       <li><Link onClick={() => setNavClick(!navClick)} to="#" className="section-link"> Blog</Link>
         <ul className="sub-menu">

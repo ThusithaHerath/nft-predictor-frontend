@@ -118,6 +118,7 @@ interface PredictionResponse {
           });
       
           const result = await response.json();
+          console.log(result);
       
           if (response.ok) {
             toast.success(`Prediction Success: ${result.success_probability}`, {

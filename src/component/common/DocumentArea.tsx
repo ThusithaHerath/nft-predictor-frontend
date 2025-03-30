@@ -85,7 +85,7 @@ const DocumentArea = ({ predictionData }: { predictionData: PredictionResponse |
                
 
                {/* Best Locations */}
-               <div className="mt-4">
+               {/* <div className="mt-4">
                   <h4 className="text-primary">📍 Best Locations</h4>
                   <ul className="list-group">
                      {predictionData.location_success_rates.map((location, index) => (
@@ -95,7 +95,7 @@ const DocumentArea = ({ predictionData }: { predictionData: PredictionResponse |
                         </li>
                      ))}
                   </ul>
-               </div>
+               </div> */}
 
                {/* Google Map */}
                <div className="mt-4">
