@@ -167,28 +167,30 @@ interface PredictionResponse {
                     <div className="col-md-6">
                       <div className="form-grp">
                       <label>Volume</label>
-                      <input type="number" {...existingFormMethods.register("Volume")} placeholder="Volume" />
+                      <input type="number"   max="15000"
+                      {...existingFormMethods.register("Volume")} placeholder="Volume" />
                       <p className="form_error">{existingFormMethods.formState.errors.Volume?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
                       <label>Sales</label>
-                      <input type="number" {...existingFormMethods.register("Sales")} placeholder="Sales" />
+                      <input type="number"   min="0" 
+  max="3000" {...existingFormMethods.register("Sales")} placeholder="Sales (Up to 20000)" />
                       <p className="form_error">{existingFormMethods.formState.errors.Sales?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
                       <label>Owners</label>
-                      <input type="number" {...existingFormMethods.register("Owners")} placeholder="Owners" />
+                      <input type="number"  min="0"  {...existingFormMethods.register("Owners")} placeholder="Owners" />
                       <p className="form_error">{existingFormMethods.formState.errors.Owners?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
                       <label>Average Price</label>
-                      <input type="number" step="0.1" {...existingFormMethods.register("Average_Price")} placeholder="Average Price" />
+                      <input type="number" min="0" max="10" step="0.1" {...existingFormMethods.register("Average_Price")} placeholder="Average Price" />
                       <p className="form_error">{existingFormMethods.formState.errors.Average_Price?.message}</p>
                       </div>
                     </div>
@@ -223,14 +225,14 @@ interface PredictionResponse {
                     <div className="col-md-6">
                       <div className="form-grp">
                       <label>Roadmap Strength</label>
-                      <input type="number" {...newFormMethods.register("Roadmap_Strength")} placeholder="Roadmap Strength" />
+                      <input type="number" min="0" {...newFormMethods.register("Roadmap_Strength")} placeholder="Roadmap Strength" />
                       <p className="form_error">{newFormMethods.formState.errors.Roadmap_Strength?.message}</p>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-grp">
-                      <label>Social Media Sentiment</label>
-                      <input type="number" step="0.1" {...newFormMethods.register("Social_Media_Sentiment")} placeholder="Social Media Sentiment (0-1)" />
+                      <label>Social Media Sentiment </label>
+                      <input type="number" min="0" step="0.1"  max="1"  {...newFormMethods.register("Social_Media_Sentiment")} placeholder="Social Media Sentiment (0-1)" />
                       <p className="form_error">{newFormMethods.formState.errors.Social_Media_Sentiment?.message}</p>
                       </div>
                     </div>
