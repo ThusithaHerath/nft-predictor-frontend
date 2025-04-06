@@ -21,14 +21,14 @@ const HeaderThree = () => {
                                 <div className="menu-wrap">
                                     <nav className="menu-nav">
                                         <div className="logo">
-                                            <Link to="/"><img src="/assets/img/logo/NFT.png" alt="Logo" /></Link>
+                                            <Link to="/"><img src="assets/img/logo/logo1.png" alt="Logo" /></Link>
                                         </div>
                                         <div className="navbar-wrap main-menu d-none d-lg-flex">
                                             <NavMenu />
                                         </div>
                                         <div className="header-action">
                                             <ul className="list-wrap">
-                                                <li className="header-login"><Link to="/login">Login<i className="fas fa-user"></i></Link></li>
+                                                {/* <li className="header-login"><Link to="/login">Login<i className="fas fa-user"></i></Link></li> */}
                                                 <li className="offcanvas-menu"><a onClick={() => setOffCanvas(true)} style={{ cursor: "pointer" }} className="menu-tigger"><i className="fas fa-bars"></i></a></li>
                                             </ul>
                                         </div>

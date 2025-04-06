@@ -5,7 +5,7 @@ import Predict from '../component/predict';
 const Home = () => {
    return (
       <Wrapper>
-         <SEO pageTitle={'Contact NFT Predictor'} />
+         <SEO pageTitle={'Get Your Predictions'} />
          <Predict />
       </Wrapper>
    );

@@ -33,10 +33,10 @@ const MobileMenusTwo = ({ setIsActive }: any) => {
                onClick={() => openMobileMenu("Home")} >
                <i className={`${navTitle === "Home" ? "fas fa-angle-up" : "fas fa-angle-down"}`}></i>
             </div>
-            <ul className="sub-menu" style={{ display: navTitle === "Home" ? "block" : "none" }}>
+            {/* <ul className="sub-menu" style={{ display: navTitle === "Home" ? "block" : "none" }}>
                <li onClick={closeSidebar}><Link onClick={() => setNavClick(!navClick)} to="/"> ICO Investment</Link></li>
                <li onClick={closeSidebar}><Link onClick={() => setNavClick(!navClick)} to="/home-two"> Blockchain</Link></li>
-            </ul>
+            </ul> */}
          </li>
          <li onClick={closeSidebar}>
             <HashLink onClick={() => setNavClick(!navClick)} to="/home-two/#blockchain" className="section-link">Why Blockchain</HashLink>

@@ -9,7 +9,7 @@ const FooterTwo = () => {
                   <div className="widget footer-widget">
                      <div className="widget-about">
                         <div className="footer-logo">
-                           <Link to="/"><img src="/assets/img/logo/NFT.png" style={{ height: "35px" }} alt="NFT Predictor" /></Link>
+                           <Link to="/"><img src="assets/img/logo/logo1.png" style={{ height: "35px" }} alt="NFT Predictor" /></Link>
                         </div>
                         <p className="about-text">NFT Predictor is a cutting-edge blockchain technology company at the forefront of innovation in the decentralized ledger space. Established in 2024</p>
                         <div className="social-btn style2">

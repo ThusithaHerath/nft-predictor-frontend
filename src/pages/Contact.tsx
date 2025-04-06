@@ -5,7 +5,7 @@ import Contact from '../component/contact';
 const Home = () => {
    return (
       <Wrapper>
-         <SEO pageTitle={'Contact NFT Predictor'} />
+         <SEO pageTitle={'Get Your Predictions'} />
          <Contact />
       </Wrapper>
    );

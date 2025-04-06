@@ -37,7 +37,7 @@ const FooterThree = () => {
       <footer>
          <div className="footer-area footer-bg" style={{ backgroundImage: `url(/assets/img/bg/footer_bg.png)` }}>
             <div className="container">
-               <div className="footer-top">
+               {/* <div className="footer-top">
                   <div className="row">
                      {footer_data.map((item) => (
                         <div key={item.id} className={item.class_name}>
@@ -64,7 +64,7 @@ const FooterThree = () => {
                         </div>
                      </div>
                   </div>
-               </div>
+               </div> */}
 
                <div className="footer-bottom">
                   <div className="row">

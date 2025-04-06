@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const FooterOne = () => {
    return (
@@ -7,10 +7,11 @@ const FooterOne = () => {
             <img src="/assets/img/update/bg/bg-gradient1-1.jpg" alt="img" />
          </div>
          <div className="container">
-            <div className="footer-menu-area">
-               <div className="row gy-4 justify-content-between align-items-center">
-                  <div className="col-xl-5 col-lg-4">
-                     <div className="social-btn justify-content-center justify-content-lg-start">
+            {/* Center footer-menu-area */}
+            <div className="footer-menu-area d-flex justify-content-center">
+               <div className="row gy-4 align-items-center text-center">
+                  <div className="col-12">
+                     <div className="social-btn justify-content-center">
                         <Link to="https://www.facebook.com/">
                            <i className="fab fa-facebook-f"></i>
                         </Link>
@@ -29,69 +30,24 @@ const FooterOne = () => {
                         </Link>
                      </div>
                   </div>
-                  <div className="col-xl-7 col-lg-8 text-lg-end text-center">
-                     <ul className="footer-menu-list">
-                        <li>
-                           <Link to="index.html">
-                              HOME
-                           </Link>
-                        </li>
-                        <li>
-                           <Link to="#">
-                              OUR PROJECTS
-                           </Link>
-                        </li>
-                        <li>
-                           <Link to="#">
-                              OUR TEAM
-                           </Link>
-                        </li>
-                        <li>
-                           <Link to="#">
-                              NEWS FAQ
-                           </Link>
-                        </li>
-                        <li>
-                           <Link to="#">
-                              DOCUMENTS
-                           </Link>
-                        </li>
-                     </ul>
-                  </div>
                </div>
             </div>
          </div>
-         <div className="copyright-wrap text-center text-lg-start">
-            <div className="container">
-               <div className="row gy-3 justify-content-between align-items-center">
-                  <div className="col-lg-6 align-self-center">
-                     <p className="copyright-text">Copyright © 2025 <Link to="#">NFT-Predictor</Link> All rights reserved.</p>
-                  </div>
-                  <div className="col-lg-6 text-lg-end">
-                     {/* <ul className="footer-links">
-                        <li>
-                           <Link to="blog.html">
-                              Job & Career
-                           </Link>
-                        </li>
-                        <li>
-                           <Link to="contact.html">
-                              Terms and Condition
-                           </Link>
-                        </li>
-                        <li>
-                           <Link to="contact.html">
-                              Help Center
-                           </Link>
-                        </li>
-                     </ul> */}
-                  </div>
 
+         {/* Center copyright-wrap */}
+         <div className="copyright-wrap text-center">
+            <div className="container">
+               <div className="row gy-3 justify-content-center">
+                  <div className="col-auto">
+                     <p className="copyright-text">
+                        Copyright © 2025 <Link to="#">NFT-Predictor</Link> All rights reserved.
+                     </p>
+                  </div>
                </div>
             </div>
          </div>
       </footer>
-   )
-}
+   );
+};
 
-export default FooterOne
+export default FooterOne;

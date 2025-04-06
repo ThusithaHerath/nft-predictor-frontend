@@ -14,10 +14,10 @@ const NavMenu = () => {
     <ul className="navigation">
       <li className="menu-item-has-children">
         <Link onClick={() => setNavClick(!navClick)} to="#" className="section-link"> Home</Link>
-        <ul className="sub-menu">
+        {/* <ul className="sub-menu">
           <li><Link onClick={() => setNavClick(!navClick)} to="/"> ICO Investment</Link></li>
           <li><Link onClick={() => setNavClick(!navClick)} to="/home-two"> Blockchain</Link></li>
-        </ul>
+        </ul> */}
       </li>
       {/* <li><HashLink to="/#featureone" className="section-link">Feature</HashLink></li> */}
       <li><HashLink to="/#roadMap" className="section-link">RoadMap</HashLink></li>

@@ -20,14 +20,14 @@ const HeaderOne = () => {
                                 <div className="menu-wrap">
                                     <nav className="menu-nav">
                                         <div className="logo">
-                                            <Link to="/"><img src="/assets/img/logo/NFT.png" alt="Logo" /></Link>
+                                            <Link to="/"><img src="assets/img/logo/logo1.png" alt="Logo" /></Link>
                                         </div>
                                         <div className="navbar-wrap main-menu d-none d-lg-flex">
                                             <NavMenu />
                                         </div>
                                         <div className="header-action">
                                             <ul className="list-wrap">
-                                                <li className="header-login"><Link className="btn2" to="/login">LOGIN</Link></li>
+                                                {/* <li className="header-login"><Link className="btn2" to="/login">LOGIN</Link></li> */}
                                             </ul>
                                         </div>
                                         <div onClick={() => setIsActive(true)} className="mobile-nav-toggler"><i className="fas fa-bars"></i></div>
