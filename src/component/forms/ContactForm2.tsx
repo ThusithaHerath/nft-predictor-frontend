@@ -215,13 +215,23 @@ interface PredictionResponse {
               <div className="tab-pane fade show active">
                 <form ref={form} onSubmit={handleSubmit(predictSuccess)}>
                   <div className="row">
-                    <div className="col-md-6">
-                      <div className="form-grp">
-                      <label>Category</label>
-                      <input type="text" {...newFormMethods.register("Category")} placeholder="Category" />
-                      <p className="form_error">{newFormMethods.formState.errors.Category?.message}</p>
-                      </div>
-                    </div>
+                  <div className="col-md-6">
+                  <div className="form-grp">
+                    <label>Category</label>
+                    <select
+                    {...newFormMethods.register("Category")}
+                    className="form-control bg-dark text-white rounded-pill px-3 py-2"
+                  >
+                    <option value="" className='text-white/60'>Select Category</option>
+                    <option value="Art">Art</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Collectibles">Collectibles</option>
+                    <option value="Utility">Utility</option>
+                    <option value="Metaverse">Metaverse</option>
+                  </select>
+                  <p className="form_error">{newFormMethods.formState.errors.Category?.message}</p>
+                  </div>
+                </div>
                     <div className="col-md-6">
                       <div className="form-grp">
                       <label>Roadmap Strength</label>
