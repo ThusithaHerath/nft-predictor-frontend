@@ -168,7 +168,7 @@ interface PredictionResponse {
                       <div className="form-grp">
                       <label>Volume</label>
                       <input type="number"   max="15000"
-                      {...existingFormMethods.register("Volume")} placeholder="Volume" />
+                      {...existingFormMethods.register("Volume")} placeholder="Volume  (Up to 20000)" />
                       <p className="form_error">{existingFormMethods.formState.errors.Volume?.message}</p>
                       </div>
                     </div>
@@ -176,7 +176,7 @@ interface PredictionResponse {
                       <div className="form-grp">
                       <label>Sales</label>
                       <input type="number"   min="0" 
-  max="3000" {...existingFormMethods.register("Sales")} placeholder="Sales (Up to 20000)" />
+  max="3000" {...existingFormMethods.register("Sales")} placeholder="Sales" />
                       <p className="form_error">{existingFormMethods.formState.errors.Sales?.message}</p>
                       </div>
                     </div>
